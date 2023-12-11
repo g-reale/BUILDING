@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbqg7aw6erryj"]
+
+[ext_resource type="Texture2D" uid="uid://kabs64d7y1un" path="res://ui/assets/corações/metade.png" id="1_wwk21"]
+[ext_resource type="Script" path="res://ui/life.gd" id="2_l7n2u"]
+[ext_resource type="Texture2D" uid="uid://bys7ukdseyx5j" path="res://ui/assets/corações/fazio.png" id="3_cuxex"]
+[ext_resource type="Texture2D" uid="uid://d34j2qapx05e4" path="res://ui/assets/corações/cheio.png" id="4_bxqhr"]
+
+[sub_resource type="Animation" id="Animation_soabf"]
+resource_name = "die"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_wwk21"), ExtResource("3_cuxex")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7s81i"]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_bxqhr"), ExtResource("1_wwk21")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7ctjf"]
+resource_name = "revive"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_cuxex"), ExtResource("4_bxqhr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8c0ca"]
+_data = {
+"die": SubResource("Animation_soabf"),
+"hurt": SubResource("Animation_7s81i"),
+"revive": SubResource("Animation_7ctjf")
+}
+
+[node name="heart" type="TextureRect"]
+texture = ExtResource("1_wwk21")
+script = ExtResource("2_l7n2u")
+
+[node name="lifeAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8c0ca")
+}

@@ -12,16 +12,16 @@ const lose_sound = preload("res://game/assets/lose.wav")
 signal sigkill
 
 #coordinates of the image's windows
-var windows = [Vector2(962, 645),
-   			   Vector2(962, 789),
-		   	   Vector2(962, 950),
-			   Vector2(1220,645),
-			   Vector2(1220,789),
-			   Vector2(1350,322),
-			   Vector2(1350,451),
-			   Vector2(1746,557),
-			   Vector2(1746,735),
-			   Vector2(1746,910)]
+var windows = [Vector2(951, 527),
+   			   Vector2(951, 661),
+		   	   Vector2(951, 794),
+			   Vector2(1184,517),
+			   Vector2(1184,661),
+			   Vector2(1300,226),
+			   Vector2(1300,341),
+			   Vector2(1618,445),
+			   Vector2(1618,609),
+			   Vector2(1618,766)]
 
 const winner_amount = 4
 var playing = false
@@ -54,7 +54,7 @@ func _on_sucess(letter):
 	if points == winner_amount:
 		won()
 
-var hp = 2
+var hp = 4
 func _on_failure(_letter):
 	hp = hp - 1
 	ui.show_dmg(hp)
@@ -103,14 +103,14 @@ func setup_run():
 		var letter = letter_scene.instantiate()
 		add_child(letter)
 		
-		letter.set("theme_override_font_sizes/font_size",100 * scale_factor.length())
+		letter.set("theme_override_font_sizes/font_size",60 * scale_factor.length())
 		letter.set("text",alphabet[winners[i]])
 		letter.set("role",role)
 		letter.position = window - letter.size/2
 		
 		var stagger = randf()
 		stagger -= floor(stagger)
-		letter.animate(stagger)
+		letter.animate(stagger,0.7)
 		
 		letter.connect("sucess",_on_sucess)
 		letter.connect("failure",_on_failure)

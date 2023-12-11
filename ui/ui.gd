@@ -6,17 +6,17 @@ signal restart
 const snd_on_off_textures = [preload("res://ui/assets/on_off som/caixaSom2.png"),
 							 preload("res://ui/assets/on_off som/caixaSom.png")]
 
-
 @onready var restart_btn = get_node("upper/restart")
 @onready var sound_btn = get_node("upper/sound")
 @onready var play_btn = get_node("central/play")
-@onready var lifebar = get_node("lifeAnimations")
+@onready var lifebar = [get_node("upperr/heart1"),get_node("upperr/heart")]
 @onready var particles = get_node("particleAnimations")
 
-#inital load conditions
-#happens only once, no need to preload anything
+# inital load conditions
+# happens only once, no need to preload anything
 func _ready():
-	get_node("life").texture = load("res://ui/assets/corações/cheio.png")
+	lifebar[0].texture = load("res://ui/assets/corações/cheio.png")
+	lifebar[1].texture = load("res://ui/assets/corações/cheio.png")	
 	get_node("particles").emitting = false
 	
 func _on_play_activated():
@@ -40,10 +40,11 @@ func toggle_volume():
 	
 func reset():
 	play_btn.reapear()
-	lifebar.revive()
+	lifebar[0].revive()
+	lifebar[1].revive()
 
 func show_dmg(dmg):
-	lifebar.show_dmg(dmg)
+	lifebar[int(dmg)/lifebar.size()].show_dmg(dmg%lifebar.size())
 
 func show_particles():
 	particles.play("peek")
